@@ -4,17 +4,17 @@
         <item
             android:id="@+id/nav_first_fragment"
             android:icon="@mipmap/ic_one"
-            android:title="First" />
+            android:title="New Word" />
 
         <item
             android:id="@+id/nav_second_fragment"
             android:icon="@mipmap/ic_two"
-            android:title="Second" />
+            android:title="Search Word" />
 
         <item
             android:id="@+id/nav_third_fragment"
             android:icon="@mipmap/ic_three"
-            android:title="Third" />
+            android:title="All Words" />
 
     </group>
 </menu>

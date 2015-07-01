@@ -3,12 +3,61 @@
     android:layout_height="match_parent" tools:context="com.abiroid.mydictionary.FirstFragment">
 
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edWord"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="57dp"
+        android:hint="New Word" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edEngMeaning"
+        android:layout_below="@+id/edWord"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="English Meaning" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edUrduMeaning"
+        android:layout_below="@+id/edEngMeaning"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="Urdu Meaning" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/edEngUsage"
+        android:layout_below="@+id/edUrduMeaning"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="English Usage" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/edUrduUsage"
+        android:layout_below="@+id/edEngUsage"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="Urdu Usage" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="69dp" />
+        android:text="Add New Word"
+        android:id="@+id/btnAddWord"
+        android:layout_below="@+id/edUrduUsage"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

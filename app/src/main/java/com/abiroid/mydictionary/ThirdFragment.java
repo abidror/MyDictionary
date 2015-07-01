@@ -7,6 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+
+import model.MyDictionaryDatabaseHelper;
+import model.Word;
 
 
 /**
@@ -18,6 +25,10 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class ThirdFragment extends Fragment {
+
+    ArrayAdapter<Word> adapterWords;
+    private ListView lvWords;
+    MyDictionaryDatabaseHelper db;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -64,7 +75,16 @@ public class ThirdFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_third, container, false);
+        View view = inflater.inflate(R.layout.fragment_third, container, false);
+        db = new MyDictionaryDatabaseHelper(getActivity());
+        lvWords = (ListView)view.findViewById(R.id.lvWords);
+
+        ArrayList<Word> words = db.getAllWords();
+        adapterWords = new ArrayAdapter<Word>(getActivity(), android.R.layout.simple_list_item_activated_1, words);
+
+        lvWords.setAdapter(adapterWords);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

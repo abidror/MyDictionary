@@ -8,7 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import model.MyDictionaryDatabaseHelper;
+import model.Word;
 
 
 /**
@@ -21,7 +25,11 @@ import android.widget.Toast;
  */
 public class FirstFragment extends Fragment {
 
-    Button btn;
+    Button btnAdd;
+    EditText edWord, edEngMeaning, edUrduMeaning, edEngUsage, edUrduUsage;
+
+    MyDictionaryDatabaseHelper db;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -70,16 +78,44 @@ public class FirstFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_first, container, false);
 
-        btn = (Button)view.findViewById(R.id.button);
+        btnAdd = (Button)view.findViewById(R.id.btnAddWord);
+        edWord = (EditText)view.findViewById(R.id.edWord);
+        edEngMeaning = ( EditText)view.findViewById(R.id.edEngMeaning);
+        edUrduMeaning = (EditText)view.findViewById(R.id.edUrduMeaning);
+        edEngUsage = (EditText)view.findViewById(R.id.edEngUsage);
+        edUrduUsage = (EditText)view.findViewById(R.id.edUrduUsage);
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "Testing", Toast.LENGTH_LONG).show();
-            }
-        });
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+                                      @Override
+          public void onClick(View view)
+              {
+              Word word = new Word(edWord.getText().toString(), edEngUsage.getText().toString(), edUrduMeaning.getText().toString(), edEngUsage.getText().toString(), edUrduUsage.getText().toString());
+              db  = new MyDictionaryDatabaseHelper(getActivity());
+
+              long result = db.addWord(word);
+
+                                          if( result != -1) {
+                                              Toast.makeText(getActivity(), "Word added", Toast.LENGTH_LONG).show();
+                                              System.out.println( "**********************Added****************");
+                                          }
+                                          else {
+                                              Toast.makeText(getActivity(), "Word not added", Toast.LENGTH_LONG).show();
+                                              System.out.println( "*********Not added******");
+                                          }
+           }
+        }
+
+        );
+
 
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
