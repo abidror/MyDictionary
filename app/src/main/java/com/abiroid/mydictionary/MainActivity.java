@@ -1,5 +1,7 @@
 package com.abiroid.mydictionary;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -164,7 +166,21 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
-            super.onBackPressed();
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("Close App");
+            builder.setMessage("Are you sure to Exit ? ");
+            builder.setIcon(android.R.drawable.ic_dialog_alert);
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //super.onBackPressed();
+                    finish();
+                }
+            });
+
+            builder.setNegativeButton("No", null);
+            builder.show();
+
         }
     }
 }

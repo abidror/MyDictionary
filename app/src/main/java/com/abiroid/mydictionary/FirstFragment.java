@@ -25,7 +25,7 @@ import model.Word;
  */
 public class FirstFragment extends Fragment {
 
-    Button btnAdd;
+    Button btnAdd, btnClear;
     EditText edWord, edEngMeaning, edUrduMeaning, edEngUsage, edUrduUsage;
 
     MyDictionaryDatabaseHelper db;
@@ -79,6 +79,7 @@ public class FirstFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_first, container, false);
 
         btnAdd = (Button)view.findViewById(R.id.btnAddWord);
+        btnClear = (Button)view.findViewById(R.id.btnClear);
         edWord = (EditText)view.findViewById(R.id.edWord);
         edEngMeaning = ( EditText)view.findViewById(R.id.edEngMeaning);
         edUrduMeaning = (EditText)view.findViewById(R.id.edUrduMeaning);
@@ -86,27 +87,39 @@ public class FirstFragment extends Fragment {
         edUrduUsage = (EditText)view.findViewById(R.id.edUrduUsage);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
-                                      @Override
-          public void onClick(View view)
-              {
-              Word word = new Word(edWord.getText().toString(), edEngUsage.getText().toString(), edUrduMeaning.getText().toString(), edEngUsage.getText().toString(), edUrduUsage.getText().toString());
-              db  = new MyDictionaryDatabaseHelper(getActivity());
+            @Override
+            public void onClick(View view) {
 
-              long result = db.addWord(word);
+                if (edWord.getText().toString().equals("")) {
+                    Toast.makeText(getActivity(), "Nothing to Save", Toast.LENGTH_LONG).show();
+                } else {
+                    Word word = new Word(edWord.getText().toString(), edEngUsage.getText().toString(), edUrduMeaning.getText().toString(), edEngUsage.getText().toString(), edUrduUsage.getText().toString());
+                    db = new MyDictionaryDatabaseHelper(getActivity());
 
-                                          if( result != -1) {
-                                              Toast.makeText(getActivity(), "Word added", Toast.LENGTH_LONG).show();
-                                              System.out.println( "**********************Added****************");
-                                          }
-                                          else {
-                                              Toast.makeText(getActivity(), "Word not added", Toast.LENGTH_LONG).show();
-                                              System.out.println( "*********Not added******");
-                                          }
-           }
-        }
+                    long result = db.addWord(word);
 
-        );
+                    if (result != -1) {
+                        Toast.makeText(getActivity(), "Word added", Toast.LENGTH_LONG).show();
+                        System.out.println("**********************Added****************");
+                    } else {
+                        Toast.makeText(getActivity(), "Word not added", Toast.LENGTH_LONG).show();
+                        System.out.println("*********Not added******");
+                    }
+                }
+            }
+        });
 
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                edWord.setText("");
+                edEngMeaning.setText("");
+                edUrduMeaning.setText("");
+                edEngUsage.setText("");
+                edUrduUsage.setText("");
+            }
+        });
 
         return view;
     }

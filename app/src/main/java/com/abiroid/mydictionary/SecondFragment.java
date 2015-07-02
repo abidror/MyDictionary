@@ -93,7 +93,7 @@ public class SecondFragment extends Fragment {
         btnSearch.setOnClickListener(new View.OnClickListener() {
                                          @Override
               public void onClick(View view) {
-                    String searchWord = edWord.getText().toString();
+                    String searchWord = edWord.getText().toString().trim();
                     db = new MyDictionaryDatabaseHelper(getActivity());
                     Word word = db.findWord(searchWord);
 
