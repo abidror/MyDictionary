@@ -28,9 +28,12 @@ import model.Word;
  */
 public class SecondFragment extends Fragment {
 
-    private Button btnSearch, btnPronounce;
+    private Button btnSearch, btnPronounce, btnClear, btnUpdate;
     private EditText edWord, edEngMeaning, edUrduMeaning, edEngUsage, edUrduUsage;
     private MyDictionaryDatabaseHelper db;
+
+    private boolean canBeUpdated;
+    private int updateWordId;
 
     private TextToSpeech tts;
     // TODO: Rename parameter arguments, choose names that match
@@ -79,9 +82,13 @@ public class SecondFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_second, container, false);
+        db = new MyDictionaryDatabaseHelper(getActivity());
         btnSearch = (Button)view.findViewById(R.id.btnSearch);
         btnPronounce = (Button)view.findViewById(R.id.btnPronounce);
+        btnClear = (Button)view.findViewById(R.id.btnClear);
+        btnUpdate = (Button)view.findViewById(R.id.btnUpdate);
 
         edWord = (EditText)view.findViewById(R.id.edWord);
         //edWord.setText("wow");
@@ -94,7 +101,7 @@ public class SecondFragment extends Fragment {
                                          @Override
               public void onClick(View view) {
                     String searchWord = edWord.getText().toString().trim();
-                    db = new MyDictionaryDatabaseHelper(getActivity());
+                    //db = new MyDictionaryDatabaseHelper(getActivity());
                     Word word = db.findWord(searchWord);
 
                     if(word != null)
@@ -104,6 +111,9 @@ public class SecondFragment extends Fragment {
                         edUrduMeaning.setText(word.getUrduMeaning());
                         edEngUsage.setText(word.getEngUsage());
                         edUrduUsage.setText(word.getUrduUsage());
+
+                        canBeUpdated = true;
+                        updateWordId = word.getId();
                     }
                     else
                     {
@@ -136,8 +146,49 @@ public class SecondFragment extends Fragment {
                 }
             }
         });
+
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                edWord.setText("");
+                edEngMeaning.setText("");
+                edUrduMeaning.setText("");
+                edEngUsage.setText("");
+                edUrduUsage.setText("");
+
+                canBeUpdated = false;
+                updateWordId = 0;
+            }
+        });
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(canBeUpdated && updateWordId != 0)
+                {
+                    Word word = new Word(edWord.getText().toString(), edEngMeaning.getText().toString(), edUrduMeaning.getText().toString(), edEngUsage.getText().toString(), edUrduUsage.getText().toString());
+                    word.setId(updateWordId);
+                    //db = new MyDictionaryDatabaseHelper(getActivity());
+                    long result = db.updateWord(word);
+                    if( result > 0)
+                    {
+                        Toast.makeText(getActivity(), "Word Updated", Toast.LENGTH_LONG).show();
+
+                        canBeUpdated = false;
+                        updateWordId = 0;
+                    }
+                    else
+                    {
+                        Toast.makeText(getActivity(), "Word not updated", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
         return view;
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

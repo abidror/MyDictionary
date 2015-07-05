@@ -73,5 +73,23 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear"
+        android:id="@+id/btnClear"
+        android:layout_below="@+id/edUrduUsage"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:id="@+id/btnUpdate"
+        android:layout_below="@+id/edUrduUsage"
+        android:layout_toLeftOf="@+id/btnClear"
+        android:layout_toStartOf="@+id/btnClear" />
+
 
 </RelativeLayout>

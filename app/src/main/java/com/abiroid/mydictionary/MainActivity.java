@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawer = (DrawerLayout)findViewById(R.id.drawer_layout);
 
         final ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.mipmap.ic_menu_three);
+        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
 
         nvDrawer = (NavigationView)findViewById(R.id.nvView);

@@ -93,17 +93,17 @@ public class FirstFragment extends Fragment {
                 if (edWord.getText().toString().equals("")) {
                     Toast.makeText(getActivity(), "Nothing to Save", Toast.LENGTH_LONG).show();
                 } else {
-                    Word word = new Word(edWord.getText().toString(), edEngUsage.getText().toString(), edUrduMeaning.getText().toString(), edEngUsage.getText().toString(), edUrduUsage.getText().toString());
+                    Word word = new Word(edWord.getText().toString(), edEngMeaning.getText().toString(), edUrduMeaning.getText().toString(), edEngUsage.getText().toString(), edUrduUsage.getText().toString());
                     db = new MyDictionaryDatabaseHelper(getActivity());
 
                     long result = db.addWord(word);
 
                     if (result != -1) {
                         Toast.makeText(getActivity(), "Word added", Toast.LENGTH_LONG).show();
-                        System.out.println("**********************Added****************");
+                        //System.out.println("**********************Added****************");
                     } else {
                         Toast.makeText(getActivity(), "Word not added", Toast.LENGTH_LONG).show();
-                        System.out.println("*********Not added******");
+                        //System.out.println("*********Not added******");
                     }
                 }
             }
