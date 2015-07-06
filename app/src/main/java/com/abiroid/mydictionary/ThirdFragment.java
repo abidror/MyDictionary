@@ -1,14 +1,18 @@
 package com.abiroid.mydictionary;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -83,6 +87,53 @@ public class ThirdFragment extends Fragment {
         adapterWords = new ArrayAdapter<Word>(getActivity(), android.R.layout.simple_list_item_activated_1, words);
 
         lvWords.setAdapter(adapterWords);
+
+        lvWords.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Word word = (Word)adapterWords.getItem(i);
+                Toast.makeText(getActivity(), "" + word.getWordId(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+        lvWords.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(final AdapterView<?> adapterView, View view, final int position, long l) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Are you Sure");
+                builder.setMessage("Are you sure to delete this word ? ");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Word word = (Word) adapterWords.getItem(position);
+                        int id = word.getWordId();
+
+                        System.out.println( "ID : " + id );
+                        int result = db.deleteWord(id);
+
+                        if (result != 0)
+                        {
+                            adapterWords.remove(word);
+                            adapterWords.notifyDataSetChanged();
+                            Toast.makeText(getActivity(), "Word Deleted", Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(getActivity(), "Somethings not right", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                });
+                builder.setNegativeButton("No", null);
+                builder.show();
+
+                return false;
+            }
+        });
 
         return view;
     }

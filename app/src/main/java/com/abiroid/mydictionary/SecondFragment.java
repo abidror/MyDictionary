@@ -113,7 +113,7 @@ public class SecondFragment extends Fragment {
                         edUrduUsage.setText(word.getUrduUsage());
 
                         canBeUpdated = true;
-                        updateWordId = word.getId();
+                        updateWordId = word.getWordId();
                     }
                     else
                     {
@@ -169,7 +169,7 @@ public class SecondFragment extends Fragment {
                 if(canBeUpdated && updateWordId != 0)
                 {
                     Word word = new Word(edWord.getText().toString(), edEngMeaning.getText().toString(), edUrduMeaning.getText().toString(), edEngUsage.getText().toString(), edUrduUsage.getText().toString());
-                    word.setId(updateWordId);
+                    word.setWordId(updateWordId);
                     //db = new MyDictionaryDatabaseHelper(getActivity());
                     long result = db.updateWord(word);
                     if( result > 0)
