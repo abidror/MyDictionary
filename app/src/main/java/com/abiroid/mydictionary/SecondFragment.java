@@ -86,16 +86,16 @@ public class SecondFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_second, container, false);
         db = new MyDictionaryDatabaseHelper(getActivity());
         btnSearch = (Button)view.findViewById(R.id.btnSearch);
-        btnPronounce = (Button)view.findViewById(R.id.btnPronounce);
-        btnClear = (Button)view.findViewById(R.id.btnClear);
+        btnPronounce = (Button)view.findViewById(R.id.btnPronounceDia);
+        btnClear = (Button)view.findViewById(R.id.btnClose);
         btnUpdate = (Button)view.findViewById(R.id.btnUpdate);
 
-        edWord = (EditText)view.findViewById(R.id.edWord);
+        edWord = (EditText)view.findViewById(R.id.edWordDia);
         //edWord.setText("wow");
-        edEngMeaning = (EditText)view.findViewById(R.id.edEngMeaning);
-        edUrduMeaning = (EditText)view.findViewById(R.id.edUrduMeaning);
-        edEngUsage = (EditText)view.findViewById(R.id.edEngUsage);
-        edUrduUsage = (EditText)view.findViewById(R.id.edUrduUsage);
+        edEngMeaning = (EditText)view.findViewById(R.id.edEngMeaningDia);
+        edUrduMeaning = (EditText)view.findViewById(R.id.edUrduMeaningDia);
+        edEngUsage = (EditText)view.findViewById(R.id.edEngUsageDia);
+        edUrduUsage = (EditText)view.findViewById(R.id.edUrduUsageDia);
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
                                          @Override

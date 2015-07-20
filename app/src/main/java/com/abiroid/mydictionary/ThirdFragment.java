@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,8 +93,22 @@ public class ThirdFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Word word = (Word)adapterWords.getItem(i);
-                Toast.makeText(getActivity(), "" + word.getWordId(), Toast.LENGTH_LONG).show();
+               Word word = (Word)adapterWords.getItem(i);
+               // Toast.makeText(getActivity(), "" + word.getWordId(), Toast.LENGTH_LONG).show();
+
+                Bundle args = new Bundle();
+                args.putString("WORD", word.getWord());
+                args.putString("ENG_MEANING", word.getEngMeaning());
+                args.putString("URDU_MEANING", word.getUrduMeaning());
+                args.putString("ENG_USAGE", word.getEngUsage());
+                args.putString("URDU_USAGE", word.getUrduUsage());
+
+                FragmentManager fm = getFragmentManager();
+                MyDialogFragment dialogFragment = new MyDialogFragment ();
+
+                dialogFragment.setArguments(args);
+                dialogFragment.show(fm, "TAG");
+
             }
         });
 

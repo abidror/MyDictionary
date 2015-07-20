@@ -79,12 +79,12 @@ public class FirstFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_first, container, false);
 
         btnAdd = (Button)view.findViewById(R.id.btnAddWord);
-        btnClear = (Button)view.findViewById(R.id.btnClear);
-        edWord = (EditText)view.findViewById(R.id.edWord);
-        edEngMeaning = ( EditText)view.findViewById(R.id.edEngMeaning);
-        edUrduMeaning = (EditText)view.findViewById(R.id.edUrduMeaning);
-        edEngUsage = (EditText)view.findViewById(R.id.edEngUsage);
-        edUrduUsage = (EditText)view.findViewById(R.id.edUrduUsage);
+        btnClear = (Button)view.findViewById(R.id.btnClose);
+        edWord = (EditText)view.findViewById(R.id.edWordDia);
+        edEngMeaning = ( EditText)view.findViewById(R.id.edEngMeaningDia);
+        edUrduMeaning = (EditText)view.findViewById(R.id.edUrduMeaningDia);
+        edEngUsage = (EditText)view.findViewById(R.id.edEngUsageDia);
+        edUrduUsage = (EditText)view.findViewById(R.id.edUrduUsageDia);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
